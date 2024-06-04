@@ -1,3 +1,11 @@
+const btnsContainer = document.createElement("div");
+for (let i = 0; i < 3; i++) {
+    const choices = ["Rock", "Paper", "Scissors"];
+    const btn = document.createElement("button");
+    btn.textContent = choices[i];
+    btnsContainer.appendChild(btn);
+}
+document.body.appendChild(btnsContainer);
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
     let result = choices[(Math.floor(Math.random() * 3))]
