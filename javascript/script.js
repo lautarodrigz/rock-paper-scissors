@@ -6,11 +6,20 @@ for (let i = 0; i < 3; i++) {
     btnsContainer.appendChild(btn);
 }
 document.body.appendChild(btnsContainer);
+const btnsArray = Array.from(btnsContainer.children);
+
+btnsArray.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        playRound(btn.textContent, getComputerChoice());
+    })
+})
+
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
     let result = choices[(Math.floor(Math.random() * 3))]
     return result
 }
+
 function playRound(playerSelection, computerSelection) {
     console.log("You selected: " + playerSelection.toLowerCase())
     console.log("The computer selected: " + computerSelection.toLowerCase())
@@ -34,7 +43,7 @@ function playRound(playerSelection, computerSelection) {
                 case "Rock":
                     console.log("You win! Paper beats Rock")
                     return 1
-              case "Paper":
+                case "Paper":
                     console.log("Tie! Paper vs Paper")
                     return 3
                 case "Scissors":
@@ -61,6 +70,7 @@ function playRound(playerSelection, computerSelection) {
             return console.error("Error");
     }
 }
+
 // function playGame() {
 //     let playerChoice = "";
 //     let wins = 0;
