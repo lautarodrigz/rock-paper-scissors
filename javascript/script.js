@@ -7,6 +7,8 @@ for (let i = 0; i < 3; i++) {
 }
 document.body.appendChild(btnsContainer);
 const btnsArray = Array.from(btnsContainer.children);
+const selections = document.createElement("div");
+const result = document.createElement("div")
 
 btnsArray.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -14,6 +16,8 @@ btnsArray.forEach((btn) => {
     })
 })
 
+document.body.appendChild(selections);
+document.body.appendChild(result);
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
     let result = choices[(Math.floor(Math.random() * 3))]
@@ -21,19 +25,18 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    console.log("You selected: " + playerSelection.toLowerCase())
-    console.log("The computer selected: " + computerSelection.toLowerCase())
+    selections.textContent = "You selected: " + playerSelection.toLowerCase() + ".   -----    The computer selected: " + computerSelection.toLowerCase() + ".";
     switch (playerSelection.toLowerCase()) {
         case "rock":
             switch (computerSelection) {
                 case "Rock":
-                    console.log("Tie! Rock vs Rock")
+                    result.textContent = "Tie! Rock vs Rock";
                     return 3
                 case "Paper":
-                    console.log("You lose! Paper beats Rock")
+                    result.textContent = "You lose! Paper beats Rock";
                     return 2
                 case "Scissors":
-                    console.log("You win! Rock beats Scissors")
+                    result.textContent = "You win! Rock beats Scissors";
                     return 1
                 default:
                     return console.error("Error");
@@ -41,13 +44,13 @@ function playRound(playerSelection, computerSelection) {
         case "paper":
             switch (computerSelection) {
                 case "Rock":
-                    console.log("You win! Paper beats Rock")
+                    result.textContent = "You win! Paper beats Rock";
                     return 1
                 case "Paper":
-                    console.log("Tie! Paper vs Paper")
+                    result.textContent = "Tie! Paper vs Paper";
                     return 3
                 case "Scissors":
-                    console.log("You lose! Scissors beat Paper")
+                    result.textContent = "You lose! Scissors beat Paper";
                     return 2
                 default:
                     return console.error("Error");
@@ -55,13 +58,13 @@ function playRound(playerSelection, computerSelection) {
         case "scissors":
             switch (computerSelection) {
                 case "Rock":
-                    console.log("You lose! Rock beats Scissors")
+                    result.textContent = "You lose! Rock beats Scissors";
                     return 2
                 case "Paper":
-                    console.log("You win! Scissors beat Paper")
+                    result.textContent = "You win! Scissors beat Paper";
                     return 1
                 case "Scissors":
-                    console.log("Tie! Scissors vs Scissors")
+                    result.textContent = "Tie! Scissors vs Scissors";
                     return 3
                 default:
                     return console.error("Error");
