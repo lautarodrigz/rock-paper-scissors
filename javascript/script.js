@@ -8,16 +8,21 @@ for (let i = 0; i < 3; i++) {
 document.body.appendChild(btnsContainer);
 const btnsArray = Array.from(btnsContainer.children);
 const selections = document.createElement("div");
-const result = document.createElement("div")
-
-btnsArray.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        playRound(btn.textContent, getComputerChoice());
-    })
-})
+const result = document.createElement("div");
+const separator = document.createElement("br");
+const winsDiv = document.createElement("div");
+const losesDiv = document.createElement("div");
+const tiesDiv = document.createElement("div");
+const finalResult = document.createElement("div");
 
 document.body.appendChild(selections);
 document.body.appendChild(result);
+document.body.appendChild(separator);
+document.body.appendChild(winsDiv);
+document.body.appendChild(losesDiv);
+document.body.appendChild(tiesDiv);
+document.body.appendChild(separator.cloneNode());
+document.body.appendChild(finalResult);
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
     let result = choices[(Math.floor(Math.random() * 3))]
@@ -74,6 +79,41 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function playToFiveWins() {
+    let wins = 0;
+    let loses = 0;
+    let ties = 0;
+    let playRoundResult;
+    btnsArray.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            playRoundResult = playRound(btn.textContent, getComputerChoice());
+            if (playRoundResult === 1) {
+                wins++;
+            }
+            if (playRoundResult === 2) {
+                loses++;
+            }
+            if (playRoundResult === 3) {
+                ties++;
+            }
+            winsDiv.textContent = `Player won ${wins} game(s)`;
+            losesDiv.textContent = `Computer won ${loses} game(s)`;
+            tiesDiv.textContent = `${ties} game(s) tied`;
+            if (wins === 5 || loses === 5) {
+                btnsArray.forEach(btn => {
+                    btn.disabled = true;
+                })
+                if (wins === 5) {
+                    finalResult.textContent = "You won the game!! Refresh for another game!";
+                }
+                if (loses === 5) {
+                    finalResult.textContent = "You lost the game :/ Refresh if you want to try again.";
+                }
+            }
+        });
+    });
+}
+playToFiveWins();
 // function playGame() {
 //     let playerChoice = "";
 //     let wins = 0;
